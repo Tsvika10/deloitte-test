@@ -1,0 +1,33 @@
+.input,
+.btn {
+  height: 2rem;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 2rem;
+}
+
+.input-container {
+  padding: 0 2rem;
+  display: inline-block;
+  min-width: 3rem;
+
+}
+
+.input {
+  width: 15rem;
+  &.ng-invalid.ng-touched {
+    border-color: red;
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-item {
+  padding: 0 2rem;
+}

@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>Check Weather</h1>
+  <ng-container *ngFor="let weatherControlGroup of weatherFormItems.controls; index as i;">
+    <ng-container [formGroup]="getControlGroup(i)">
+      <div>
+        <select class="input" id=" weatherControlGroup.id" formControlName="city">
+          <option value="" disabled selected>Select City</option>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
+        <div class="input-container">
+          <input class="input input-text" type="text" formControlName="units"
+            placeholder="Units (standard, metric, etc)" />
+        </div>
+        <div class="input-container">
+          <input *ngIf="i === weatherFormItems.controls.length - 1" class="btn" (click)="submitItem(getControlGroup(i))"
+            type="submit" value="+" />
+        </div>
+        <div class="input-container">
+          <input type="hidden" formControlName="id">
+        </div>
+      </div>
+      <div class="flex-container">
+        <ng-container
+          *ngIf="(weatherControlGroup.value.id !== undefined || weatherControlGroup.value.id !== null) && (getCity(weatherControlGroup.value.id) | async)">
+          <div class="flex-item">
+            {{(getCity(weatherControlGroup.value.id) | async)?.city}}
+          </div>
+          <div class="flex-item">
+            {{(getCity(weatherControlGroup.value.id) | async)?.temp}};
+          </div>
+          <div class="flex-item">
+            <img
+              [src]="'http://openweathermap.org/img/wn/'+(getCity(weatherControlGroup.value.id) | async)?.iconUrl + '@2x.png'">
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="(getCities() | async)?.length">
+    <h2>Weather in:</h2>
+    <p *ngFor="let item of (getCities() | async); index as i">
+      <span>{{i + 1}}.&nbsp;</span>
+      <span>{{item.temp}}.&nbsp;</span>
+      <span>{{item.city}}&nbsp;</span>
+      <span>{{item.temp}};&nbsp;</span>
+      <span>{{item.description}}&nbsp;</span>
+    </p>
+  </ng-container>
+
+
+
+</div>
