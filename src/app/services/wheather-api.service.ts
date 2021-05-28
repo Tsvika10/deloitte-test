@@ -41,7 +41,6 @@ export class WeatherApiService {
           id: itemId
         };
         this.cityList.push(newItem);
-        console.log(this.cityList);
         this.WeatherSubject.next(this.cityList);
       })
 
